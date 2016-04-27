@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en" ng-app="houses">
+<head>
+  <meta charset="utf-8">
+  <title>Houses</title>
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+  <link rel="stylesheet" href="bower_components/font-awesome-4.6.1/css/font-awesome.css">
+  <link rel="stylesheet" href="bower_components/ng-dialog/css/ngDialog.css">
+  <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+    <link rel="stylesheet" href="bower_components/ng-dialog/css/ngDialog.css">
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="bower_components/ng-dialog/css/ngDialog-theme-default.css">
+    <link rel="stylesheet" href="bower_components/ng-dialog/css/ngDialog-theme-plain.css">
+    <link rel="stylesheet" href="bower_components/ng-dialog/css/ngDialog-custom-width.css">
+
+  <script src="bower_components/jquery/dist/jquery.js"></script>
+  <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/ng-dialog/js/ngDialog.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/controllers.js"></script>
+    <script>window.angular || document.write('<script src="../bower_components/angular/angular.min.js">\x3C/script>')</script>
+    <script src="bower_components/ng-dialog/js/ngDialog.js"></script>
+
+</head>
+<body>
+
+  <div class="view-container col-md-10 col-md-offset-1">
+
+  	<div>
+  		<add-house>
+  		</add-house>
+  	</div>
+
+    <div ng-controller="housesListCtrl">
+    	<my-house ng-repeat="house in houses" data="house" param="mat">
+    	</my-house>
+    </div>
+  </div>
+
+</body>
+</html>

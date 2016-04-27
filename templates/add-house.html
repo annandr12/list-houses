@@ -1,0 +1,58 @@
+<a href="" ng-click="openModalWin()">Default theme</a>
+<script type="text/ng-template" id="modalAddHouse">
+<div class="ngdialog-message">
+
+
+<form class="form-horizontal">
+  <div class="form-group">
+    <label for="inputName" class="col-sm-4 control-label">Name</label>
+    <div class="col-sm-6">
+      <input ng-model="house.name" type="text" class="form-control" id="inputName" placeholder="Name">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputRooms" class="col-sm-4 control-label">Number of rooms</label>
+    <div class="col-sm-6">
+      <input ng-model="house.rooms" type="number" class="form-control" id="inputRooms" placeholder="Number of rooms">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputFloors" class="col-sm-4 control-label">Number of floors</label>
+    <div class="col-sm-6">
+      <input ng-model="house.floors"  type="number" class="form-control" id="inputFloors" placeholder="Number of floors">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputPrise" class="col-sm-4 control-label">Prise</label>
+    <div class="col-sm-6">
+      <input ng-model="house.prise"  type="number" class="form-control" id="inputPrise" placeholder="Prise">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputDescription" class="col-sm-4 control-label">Description</label>
+    <div class="col-sm-6">
+      <textarea ng-model="house.description" class="form-control" rows="3" placeholder="Description"></textarea>
+    </div>
+  </div>
+    <label for="inputMaterials" class="col-sm-4 control-label">Materials</label>
+    <div class="col-sm-6">
+      <select multiple ng-model="house.materials" class="form-control">
+        <option value='1'>Бумага</option>
+        <option value='2'>Жесть</option>
+        <option value='3'>Дерево</option>
+        <option value='4'>Кирпич</option>
+      </select>
+    </div>
+    <p>aaa: {{house}} </p>
+
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-default" ng-click="addHouse(house)">Save</button>
+    </div>
+  </div>
+</form>
+
+
+
+</div>
+</script>

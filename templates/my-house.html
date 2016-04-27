@@ -1,0 +1,25 @@
+<div class="panel panel-primary ">
+  <div class="panel-heading">
+    <h3 class="panel-title">{{data.name}}</h3>
+  </div>
+  <ul class="list-group">
+    <li class="list-group-item">
+    	<lable class="col-sm-3">Number of rooms:</lable> {{data.rooms}}</li>
+    <li class="list-group-item">
+    	<lable class="col-sm-3">Number of flours:</lable> {{data.floors}} </li>
+    <li class="list-group-item">
+    	<lable class="col-sm-3">Prise:</lable> {{data.prise}} </li>
+    </ul>
+    <div class="panel-body">
+    <form class="form-horizontal">
+	    	<div class="col-sm-3 control-lable" for="mater">Materials:</div> 
+	    	<div class="col-sm-3">
+	       	<select class="form-control col-sm-3" id-"material">
+            <option ng-repeat='mater in data.materials'></option>
+			    </select>
+          <p>{{data.materials}}</p>
+			</div>
+	</form>
+    <lable class="col-sm-3">Description:</lable> <p>{{data.description}}</p>
+  </div>
+</div>
