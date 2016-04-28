@@ -1,25 +1,50 @@
-<div class="panel panel-primary ">
+<div class="panel panel-primary">
   <div class="panel-heading">
-    <h3 class="panel-title">{{data.name}}</h3>
+    <h2 class="panel-title">{{data.name}}</h2>
   </div>
   <ul class="list-group">
     <li class="list-group-item">
-    	<lable class="col-sm-3">Number of rooms:</lable> {{data.rooms}}</li>
+    	<div class="row"><lable class="col-sm-3">Number of rooms:</lable> <div class="col-sm-9">{{data.rooms}}</div></div></li>
     <li class="list-group-item">
-    	<lable class="col-sm-3">Number of flours:</lable> {{data.floors}} </li>
+    	<div class="row"><lable class="col-sm-3">Number of flours:</lable> <div class="col-sm-9">{{data.floors}}</div></div> </li>
     <li class="list-group-item">
-    	<lable class="col-sm-3">Prise:</lable> {{data.prise}} </li>
+     	<div class="row"><lable class="col-sm-3">Prise:</lable> <div class="col-sm-9">{{data.prise}}</div></div></li>
     </ul>
     <div class="panel-body">
-    <form class="form-horizontal">
-	    	<div class="col-sm-3 control-lable" for="mater">Materials:</div> 
+    <div class="row">
+    <div class="col-sm-3 control-lable" for="mater">Materials:</div> 
+    <form class="form-horizontal container-fluid">
 	    	<div class="col-sm-3">
 	       	<select class="form-control col-sm-3" id-"material">
             <option ng-repeat='mater in data.materials'></option>
 			    </select>
-          <p>{{data.materials}}</p>
+          <!-- <p>{{data.materials}}</p> -->
 			</div>
-	</form>
-    <lable class="col-sm-3">Description:</lable> <p>{{data.description}}</p>
+	   </form>
+    </div>
+    </div>
+  <div class="panel-footer">
+  <div class="row">
+    <div class="col-sm-3"><lable>Description:</lable></div> <div class="col-sm-8 col">{{data.description}}</div>
+      <div class="col-xs-1" ng-controller="housesDeleteModal">
+        <a href="" ng-click="openDefaultModal()">
+          <i class="fa fa-trash fa-2x" aria-hidden="true"></i>
+        </a>
+        <script type="text/ng-template" id="modalDeleteHouse">
+          <div class="ngdialog-message">
+          Are you sure that you want to remove {{data.name}}?
+          <div class="row">
+          <button type="button"  class="btn btn-default inline close-this-dialog" ng-click="closeThisDialog()">Cancel</button>
+          <button type="button"  class="btn btn-primary inline close-this-dialog" ng-click="deleteHouse(data.uuid)" ng-dialog-close-previous>Delete</button>
+          </div>
+          </div>
+        </script>
+      </div>  
+    <edit-house>
+      <div class="col-xs-1" >
+        <i class="fa fa-pencil fa-2x" aria-hidden="true"></i>
+      </div>
+    </edit-house>
+  </div>
   </div>
 </div>

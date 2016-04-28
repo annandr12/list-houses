@@ -4,7 +4,9 @@
 
 var houses = angular.module('houses', [
 	'housesControllers',
-	'ngDialog'
+	'ngDialog',
+    'housesDirectives',
+    'housesServices'
 	]);
 houses.config(['ngDialogProvider', function (ngDialogProvider) {
             ngDialogProvider.setDefaults({

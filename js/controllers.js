@@ -2,50 +2,32 @@
 
 /* Controllers */
 
-var housesControllers = angular.module('housesControllers', [])
-	.directive('myHouse', function(){
-		return {
-			restrict: "E",
-			scope: {
-				data: "=",
-				param: "="
-			},
-			templateUrl: '../templates/my-house.html',
-			controller: ['$scope', function($scope) {
-
-    		}],
-
-		}
-	})
-	.directive('addHouse', function(){
-		return {
-			restrict: "E",
-			scope: false,
-			controller: 'housesAddModal',
-			templateUrl: '../templates/add-house.html'
-		}
-	});
+var housesControllers = angular.module('housesControllers', []);
 
 /*	var houses = [
-	    {'name': 'House 1', 
+	    {'uuid': "b35ec271-1a0c-b0e0-40a2",
+	    'name': 'House 1', 
 	    'rooms': '20',
 	    'floors': '4',
 	    'prise':'1000',
 	   'materials': ['1','2','3','4'],
 		'description': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'},
-	    {'name': 'House 2', 
+	    {'uuid': "b55ec271-1a0c-b3e0-40a2",
+	    'name': 'House 2', 
 	    'rooms': '23',
 	    'floors': '4',
 	    'prise':'1000',
 	    'materials': ['1','2','3','4'],
 		'description': 't enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'},
-	    {'name': 'House 3', 
+	    {'uuid': "b35ec275-1a0a-b0e0-40a2",
+	    'name': 'House 3', 
 	    'rooms': '55',
 	    'floors': '4',
 	    'prise':'1000',
 	    'materials': ['1','2','3','4'],
 		'description': 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.'},
-	    {'name': 'House 4', 
+	    {'uuid': "b35ec271-1u0c-b2e0-40a2",
+	    'name': 'House 4', 
 	    'rooms': '2',
 	    'floors': '666',
 	    'prise':'1000',
@@ -54,10 +36,9 @@ var housesControllers = angular.module('housesControllers', [])
 	  	];
 	  	localStorage.setItem('houses', JSON.stringify(houses));*/
 
-housesControllers.controller('housesListCtrl', function ($scope) {
-	var saved = localStorage.getItem('houses');
-	$scope.houses = JSON.parse(saved);
-	$scope.mat = ['Бумага','Жесть','Дерево','Кирпич'];
+housesControllers.controller('housesListCtrl', function ($scope, housesService) {
+	$scope.houses = housesService.getHouses();
+	//$scope.mat = ['Бумага','Жесть','Дерево','Кирпич'];
 
 /*	for (var index = 0; index < materials.length; ++index) {
 		if($scope.houses.material[index])
@@ -65,39 +46,58 @@ housesControllers.controller('housesListCtrl', function ($scope) {
 	}*/
   	$scope.predicate = '';
 });
-housesControllers.controller('housesAddModal', function ($scope, $rootScope, ngDialog, $timeout)  {
+housesControllers.controller('housesAddModal', function ($scope, ngDialog, housesService)  {
 	var mater = ['Бумага','Жесть','Дерево','Кирпич'];
 	var identify = ['1','2','3','4'];
-	$scope.todos = localStorage.getItem('houses');
-	$scope.addItem = function(house){
+	function guid() {
+	  function s4() {
+	    return Math.floor((1 + Math.random()) * 0x10000)
+	      .toString(16)
+	      .substring(1);
+	  }
+	  return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+	    s4();
 	}
     $scope.openModalWin = function () {
         ngDialog.open({
             template: 'modalAddHouse',
-            controller: 'InsideCtrl',
             className: 'ngdialog-theme-default'
         });
     };
     $scope.addHouse = function(a){
-    	console.log(a);
-    	var saved = localStorage.getItem('houses');
-    	var array = JSON.parse(saved);
-
+    	var array = housesService.getHouses();
+    	a.uuid = guid();
     	array.push(a);
-    	localStorage.setItem('houses', JSON.stringify(array));
-    	console.log(array);
-    	/*console.log(mat);
-    	var materials = [];
-    	for(var i=0; i<4; i++){
-    		if(in_array(identify[i],mat)){
-    			materials.push({i})
-    		}
-    	}*/
+    	housesService.setHouses();
+    	ngDialog.close();
     };
 });
-housesControllers.controller('InsideCtrl', function ($scope, ngDialog) {
-    $scope.dialogModel = {
-        message : 'message from passed scope'
+
+housesControllers.controller('housesDeleteModal', function ($scope, ngDialog)  {
+	$scope.openDefaultModal = function () {
+        ngDialog.open({
+            template: 'modalDeleteHouse',
+            //plain: true,
+            controller: function($scope) {
+				/*console.log($scope.data);*/
+            },
+            scope: $scope,
+            className: 'ngdialog-theme-default'
+        });
     };
+    $scope.deleteHouse = function(uuid) {
+    	var saved = localStorage.getItem('houses');
+    	saved =  JSON.parse(saved);
+    	var k;
+    	for(var i=0; i<saved.length;i++){
+    		if(saved[i].uuid ==uuid){
+    			k=i;
+    		}
+    	}
+    	saved.splice (k, k);
+    	console.log(k);
+    	localStorage.setItem('houses', JSON.stringify(saved));
+    	ngDialog.close(); 
+    }
     
 });
