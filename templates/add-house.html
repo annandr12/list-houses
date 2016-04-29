@@ -12,19 +12,19 @@
   <div class="form-group">
     <label for="inputRooms" class="col-sm-4 control-label">Number of rooms</label>
     <div class="col-sm-6">
-      <input ng-model="house.rooms" type="number" class="form-control" id="inputRooms" placeholder="Number of rooms">
+      <input ng-model="house.rooms" type="number" min='0' class="form-control" id="inputRooms" placeholder="Number of rooms">
     </div>
   </div>
   <div class="form-group">
     <label for="inputFloors" class="col-sm-4 control-label">Number of floors</label>
     <div class="col-sm-6">
-      <input ng-model="house.floors"  type="number" class="form-control" id="inputFloors" placeholder="Number of floors">
+      <input ng-model="house.floors"  type="number" min='0'  class="form-control" id="inputFloors" placeholder="Number of floors">
     </div>
   </div>
   <div class="form-group">
     <label for="inputPrise" class="col-sm-4 control-label">Prise</label>
     <div class="col-sm-6">
-      <input ng-model="house.prise"  type="number" class="form-control" id="inputPrise" placeholder="Prise">
+      <input ng-model="house.prise"  type="number" min='0'  class="form-control" id="inputPrise" placeholder="Prise">
     </div>
   </div>
   <div class="form-group">
@@ -35,14 +35,9 @@
   </div>
     <label for="inputMaterials" class="col-sm-4 control-label">Materials</label>
     <div class="col-sm-6">
-      <select multiple ng-model="house.materials" class="form-control">
-        <option value='1'>Бумага</option>
-        <option value='2'>Жесть</option>
-        <option value='3'>Дерево</option>
-        <option value='4'>Кирпич</option>
-      </select>
+      <select class="form-control" ng-options="option.name for option in availableMaterials track by option.id"
+      ng-model="house.materials" multiple></select>
     </div>
-    <!-- <p>aaa: {{house}} </p> -->
 
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">

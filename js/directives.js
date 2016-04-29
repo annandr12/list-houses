@@ -23,4 +23,14 @@ angular.module('housesDirectives', [])
 			controller: 'housesAddModal',
 			templateUrl: '../templates/add-house.html'
 		}
+	})
+	.directive('editHouse', function(){
+		return {
+			restrict: "E",
+			scope: {
+				house: '='
+			},
+			controller: 'housesEditModal',
+			templateUrl: '../templates/add-house.html'
+		}
 	});

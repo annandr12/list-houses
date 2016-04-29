@@ -20,10 +20,23 @@ angular.module('housesServices', [])
 			}
 			localStorage.setItem('houses', JSON.stringify(newArrayHouses));
 		}
+		var editHouse = function (editedHouse){
+			var houses = getHouses();
+			for(var i=0; i<houses.length; i++){
+				if(editedHouse.uuid === houses[i].uuid){
+					houses[i] = editedHouse;
+					console.log(i);
+					console.log(houses[i]);
+				}
+			}
+			console.log(houses);
+			setHouses(houses);
+		}
 
 		return {
 			getHouses: getHouses,
-			setHouses: setHouses
+			setHouses: setHouses,
+			editHouse: editHouse
 		}
 
 	});
