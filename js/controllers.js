@@ -4,11 +4,11 @@
 
 var housesControllers = angular.module('housesControllers', []);
 
-housesControllers.controller('housesListCtrl', function ($scope, housesService) {
+housesControllers.controller('housesListCtrl', ['$scope', 'housesService', function ($scope, housesService) {
 	$scope.houses = housesService.getHouses();
   	$scope.predicate = '';
-});
-housesControllers.controller('housesAddModal', function ($scope, ngDialog, housesService)  {
+}]);
+housesControllers.controller('housesAddModal', ['$scope', 'ngDialog', 'housesService', function ($scope, ngDialog, housesService)  {
 	$scope.availableMaterials = [
 	{'id': '1', 'name': 'Paper'},
 	{'id': '2', 'name': 'Metal'},
@@ -42,9 +42,9 @@ housesControllers.controller('housesAddModal', function ($scope, ngDialog, house
         });
     };
     
-});
+}]);
 
-housesControllers.controller('housesDeleteModal', function ($scope, ngDialog, housesService)  {
+housesControllers.controller('housesDeleteModal', ['$scope', 'ngDialog', 'housesService', function ($scope, ngDialog, housesService)  {
 	$scope.openDefaultModal = function () {
         ngDialog.open({
             template: 'modalDeleteHouse',
@@ -68,9 +68,9 @@ housesControllers.controller('housesDeleteModal', function ($scope, ngDialog, ho
     	ngDialog.close(); 
     }
     
-});
+}]);
 
-housesControllers.controller('housesEditModal', function ($scope, ngDialog, housesService)  {
+housesControllers.controller('housesEditModal', ['$scope', 'ngDialog', 'housesService', function ($scope, ngDialog, housesService)  {
 	$scope.availableMaterials = [
 	{'id': '1', 'name': 'Paper'},
 	{'id': '2', 'name': 'Metal'},
@@ -93,7 +93,5 @@ housesControllers.controller('housesEditModal', function ($scope, ngDialog, hous
 			    };
             }
         });
-        e
-    };
-    
-});
+    }; 
+}]);
